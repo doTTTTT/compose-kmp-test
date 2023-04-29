@@ -22,7 +22,9 @@ kotlin {
         podfile = project.file("../iosApp/Podfile")
         framework {
             baseName = "shared"
-            isStatic = true
+            isStatic = false
+            export(project(":test-module"))
+            transitiveExport = true
         }
         extraSpecAttributes["resources"] = "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
     }
@@ -30,6 +32,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(project(":test-module"))
+
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material)
