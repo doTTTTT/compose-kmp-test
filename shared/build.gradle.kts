@@ -22,7 +22,7 @@ kotlin {
         podfile = project.file("../iosApp/Podfile")
         framework {
             baseName = "shared"
-            isStatic = false
+            isStatic = true
             export(project(":test-module"))
             transitiveExport = true
         }
@@ -32,7 +32,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":test-module"))
+                api(project(":test-module"))
 
                 implementation(compose.runtime)
                 implementation(compose.foundation)
